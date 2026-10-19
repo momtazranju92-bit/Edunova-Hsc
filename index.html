@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#087f5b">
+<meta name="description" content="নিজের HSC 2025–26 বিজ্ঞান বিভাগের সিলেবাস, পড়ার অগ্রগতি ও নোট গুছিয়ে রাখো।">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icons/icon-192.png">
+<title>EduNova — My HSC Study</title>
+<style>
+:root{--green:#087f5b;--green2:#0aa879;--bg:#f4f7f6;--card:#fff;--ink:#172b25;--muted:#64756e;--line:#e1e9e5;--gold:#f2b544}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;line-height:1.55}
+header{background:linear-gradient(135deg,#075c45,#0aa879);color:#fff;padding:24px 18px 30px;border-radius:0 0 26px 26px}
+.top{max-width:960px;margin:auto}.brand{font-size:13px;letter-spacing:.08em;opacity:.85;font-weight:800}.hero{font-size:28px;font-weight:850;margin:7px 0 4px}.sub{opacity:.9;font-size:14px}
+.wrap{max-width:960px;margin:-16px auto 0;padding:0 14px 40px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat,.panel,.subject{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 18px #183d2b08}
+.stat{padding:13px;text-align:center}.stat b{font-size:22px;color:var(--green);display:block}.stat span{font-size:12px;color:var(--muted)}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 12px}.toolbar input,.toolbar select,.notes textarea,.custom input{font:inherit;border:1px solid var(--line);background:white;border-radius:12px;padding:11px 12px;min-width:0;color:var(--ink)}.toolbar input{flex:1;min-width:180px}.toolbar select{flex:0 1 190px}
+.notice{background:#fff8e7;border:1px solid #f4dfaa;border-radius:13px;padding:12px 14px;color:#6d5015;font-size:13px;margin:12px 0 16px}
+h2{font-size:18px;margin:20px 2px 10px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.subject{padding:15px;align-self:start}.subject-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}.emoji{width:42px;height:42px;border-radius:13px;background:#e8f7f0;display:grid;place-items:center;font-size:22px}.subject h3{font-size:16px;margin:0}.subject small{color:var(--muted)}.pill{font-size:11px;color:var(--green);background:#e8f7f0;border-radius:30px;padding:3px 8px;margin-left:auto}
+.progress{height:7px;background:#e8efeb;border-radius:99px;overflow:hidden;margin:12px 0}.progress div{height:100%;background:linear-gradient(90deg,var(--green),var(--green2));width:0}
+details{border-top:1px solid var(--line);padding-top:8px;margin-top:9px}summary{cursor:pointer;font-weight:750;font-size:14px;padding:4px 0}ul.topics{padding:0;margin:8px 0 0;list-style:none}.topics li{padding:7px 0;border-bottom:1px dashed #edf1ee;display:flex;gap:9px;align-items:flex-start;font-size:13px}.topics input{margin-top:5px;accent-color:var(--green);flex:0 0 auto}.topics label{cursor:pointer;flex:1}.empty{color:var(--muted);font-size:14px;padding:20px;text-align:center}
+.panel{padding:16px;margin-top:18px}.panel p{font-size:13px;color:var(--muted);margin-top:3px}.notes textarea{width:100%;min-height:120px;resize:vertical}.custom{display:flex;gap:8px;flex-wrap:wrap}.custom input{flex:1}.btn{border:0;border-radius:12px;background:var(--green);color:white;font:inherit;font-weight:750;padding:10px 14px;cursor:pointer}.btn.secondary{background:#e8f7f0;color:var(--green)}.btn.danger{background:#fff0ee;color:#a33b2f}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px 12px}
+@media(max-width:430px){.hero{font-size:24px}.stats{gap:6px}.stat{padding:10px 5px}.stat b{font-size:19px}.stat span{font-size:11px}}
+</style>
+</head>
+<body>
+<header><div class="top">
+<div class="brand">EDUNOVA · PERSONAL STUDY SPACE</div>
+<div class="hero">আমার HSC প্রস্তুতি 📚</div>
+<div class="sub">বিজ্ঞান বিভাগ · সেশন ২০২৫–২০২৬ · নিজের পড়া গুছিয়ে রাখো</div>
+</div></header>
+<main class="wrap">
+<section class="stats" aria-label="পড়ার অগ্রগতি">
+<div class="stat"><b id="doneCount">০</b><span>শেষ করা টপিক</span></div>
+<div class="stat"><b id="totalCount">০</b><span>মোট টপিক</span></div>
+<div class="stat"><b id="percent">০%</b><span>অগ্রগতি</span></div>
+</section>
+<div class="toolbar">
+<input id="search" placeholder="বিষয় বা অধ্যায় খুঁজো…" aria-label="সার্চ">
+<select id="partFilter" aria-label="পত্র বাছাই"><option value="all">সব বিষয়/পত্র</option><option value="1">প্রথম পত্র</option><option value="2">দ্বিতীয় পত্র</option><option value="single">একক বিষয়</option></select>
+<select id="statusFilter" aria-label="অবস্থা বাছাই"><option value="all">সব টপিক</option><option value="todo">বাকি আছে</option><option value="done">শেষ করেছি</option></select>
+</div>
+<div class="notice"><b>মনে রাখবে:</b> এটি তোমার ব্যক্তিগত পড়ার ট্র্যাকার। অধ্যায়ের তালিকা বইয়ের সাধারণ অধ্যায়-নাম ধরে সাজানো; বোর্ড/কলেজের সর্বশেষ নির্দেশনার সঙ্গে মিলিয়ে নিও। নিজের প্রয়োজনমতো টপিক যোগ বা নাম পরিবর্তন করতে পারবে।</div>
+<h2>তোমার বিষয়গুলো</h2>
+<div id="subjects" class="grid"></div>
+<section class="panel">
+<h2 style="margin-top:0">📝 আমার পড়ার নোট</h2>
+<p>এই নোট শুধু এই ব্রাউজার/ডিভাইসের মধ্যে সেভ থাকবে।</p>
+<textarea id="notes" placeholder="আজ কী পড়লে, কোন সূত্র মনে রাখতে হবে, আগামীকাল কী পড়বে…"></textarea>
+<div class="actions"><button class="btn" id="saveNotes">নোট সেভ করো</button><button class="btn secondary" id="downloadBackup">ডেটা ব্যাকআপ</button><button class="btn danger" id="reset">সব অগ্রগতি মুছো</button></div>
+<div id="message" role="status" style="font-size:13px;color:var(--green);margin-top:8px"></div>
+</section>
+<section class="panel">
+<h2 style="margin-top:0">➕ নিজের টপিক যোগ করো</h2>
+<p>কোনো অধ্যায় বাদ থাকলে বা নিজের মতো করে পড়ার কাজ রাখতে চাইলে এখানে যোগ করো।</p>
+<div class="custom"><select id="customSubject" aria-label="বিষয়"></select><input id="customTopic" placeholder="টপিকের নাম লিখো"><button class="btn" id="addTopic">যোগ করো</button></div>
+</section>
+<footer>EduNova · ব্যক্তিগত ব্যবহার · তোমার অগ্রগতি এই ডিভাইসেই সংরক্ষিত হয়</footer>
+</main>
+<script>
+const subjectsData = [
+{ id:"bangla1", name:"বাংলা ১ম পত্র", group:"1", icon:"📖", parts:[["সাহিত্যপাঠ",["গদ্য: পাঠ্যবইয়ের নির্ধারিত রচনা","পদ্য: পাঠ্যবইয়ের নির্ধারিত কবিতা","সহপাঠ: উপন্যাস/নাটক","লেখক পরিচিতি ও মূলভাব","সৃজনশীল প্রশ্ন অনুশীলন"]]]},
+{ id:"bangla2", name:"বাংলা ২য় পত্র", group:"2", icon:"✍️", parts:[["ব্যাকরণ ও নির্মিতি",["বাংলা উচ্চারণের নিয়ম","বাংলা বানানের নিয়ম","ব্যাকরণিক শব্দশ্রেণি","উপসর্গ, প্রত্যয় ও সমাস","বাক্যতত্ত্ব ও বাক্যরূপান্তর","শুদ্ধি প্রয়োগ","ভাবসম্প্রসারণ","সারাংশ/সারমর্ম","প্রতিবেদন/আবেদন","প্রবন্ধ/রচনা"]]]},
+{ id:"english1", name:"English 1st Paper", group:"1", icon:"🔤", parts:[["Reading",["Textbook units and lessons","Seen comprehension","Unseen comprehension","Information transfer / summary","Flow chart / matching","Paragraph and story practice"]]]},
+{ id:"english2", name:"English 2nd Paper", group:"2", icon:"🖊️", parts:[["Grammar & Writing",["Articles and prepositions","Right form of verbs","Completing sentences","Modifiers","Connectors","Narration","Transformation of sentences","Punctuation","Formal email / application","Paragraph / composition"]]]},
+{ id:"ict", name:"তথ্য ও যোগাযোগ প্রযুক্তি (ICT)", group:"single", icon:"💻", parts:[["অধ্যায়সমূহ",["তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ প্রেক্ষিত","কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং","সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস","ওয়েব ডিজাইন পরিচিতি ও HTML","প্রোগ্রামিং ভাষা","ডেটাবেজ ম্যানেজমেন্ট সিস্টেম"]]]},
+{ id:"phy1", name:"পদার্থবিজ্ঞান ১ম পত্র", group:"1", icon:"⚛️", parts:[["অধ্যায়সমূহ",["ভৌত জগৎ ও পরিমাপ","ভেক্টর","গতিবিদ্যা","নিউটনীয় বলবিদ্যা","কাজ, শক্তি ও ক্ষমতা","মহাকর্ষ ও অভিকর্ষ","পদার্থের গাঠনিক ধর্ম","পর্যাবৃত্ত গতি","তরঙ্গ","আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব"]]]},
+{ id:"phy2", name:"পদার্থবিজ্ঞান ২য় পত্র", group:"2", icon:"🧲", parts:[["অধ্যায়সমূহ",["তাপগতিবিদ্যা","স্থির তড়িৎ","চল তড়িৎ","তড়িৎ প্রবাহের চৌম্বক ক্রিয়া ও চুম্বকত্ব","তড়িৎচৌম্বকীয় আবেশ ও পরিবর্তী প্রবাহ","জ্যামিতিক আলোকবিজ্ঞান","ভৌত আলোকবিজ্ঞান","আধুনিক পদার্থবিজ্ঞানের সূচনা","পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান","সেমিকন্ডাক্টর ও ইলেকট্রনিক্স"]]]},
+{ id:"chem1", name:"রসায়ন ১ম পত্র", group:"1", icon:"🧪", parts:[["অধ্যায়সমূহ",["ল্যাবরেটরির নিরাপদ ব্যবহার","গুণগত রসায়ন","মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন","রাসায়নিক পরিবর্তন","কর্মমুখী রসায়ন"]]]},
+{ id:"chem2", name:"রসায়ন ২য় পত্র", group:"2", icon:"⚗️", parts:[["অধ্যায়সমূহ",["পরিবেশ রসায়ন","জৈব রসায়ন","পরিমাণগত রসায়ন","তড়িৎ রসায়ন","অর্থনৈতিক/প্রয়োগিক রসায়ন"]]]},
+{ id:"bio1", name:"জীববিজ্ঞান ১ম পত্র", group:"1", icon:"🧬", parts:[["অধ্যায়সমূহ",["কোষ ও এর গঠন","কোষ বিভাজন","কোষ রসায়ন","অণুজীব","শৈবাল ও ছত্রাক","ব্রায়োফাইটা ও টেরিডোফাইটা","নগ্নবীজী ও আবৃতবীজী উদ্ভিদ","টিস্যু ও টিস্যুতন্ত্র","উদ্ভিদ শারীরতত্ত্ব","উদ্ভিদ প্রজনন","জীবপ্রযুক্তি","জীবের পরিবেশ, বিস্তার ও সংরক্ষণ"]]]},
+{ id:"bio2", name:"জীববিজ্ঞান ২য় পত্র", group:"2", icon:"🌱", parts:[["অধ্যায়সমূহ",["প্রাণীর বিভিন্নতা ও শ্রেণিবিন্যাস","প্রাণীর পরিচিতি","পরিপাক ও শোষণ","রক্ত ও সঞ্চালন","শ্বাসক্রিয়া ও শ্বসন","বর্জ্য ও নিষ্কাশন","চলন ও অঙ্গচালনা","সমন্বয় ও নিয়ন্ত্রণ","মানব জীবনের ধারাবাহিকতা","মানবদেহের প্রতিরক্ষা","জিনতত্ত্ব ও বিবর্তন","প্রাণীর আচরণ"]]]},
+{ id:"math1", name:"উচ্চতর গণিত ১ম পত্র", group:"1", icon:"📐", parts:[["অধ্যায়সমূহ",["ম্যাট্রিক্স ও নির্ণায়ক","ভেক্টর","সরলরেখা","বৃত্ত","বিন্যাস ও সমাবেশ","ত্রিকোণমিতিক অনুপাত","ফাংশন ও ফাংশনের লেখচিত্র","অন্তরীকরণ","যোগজীকরণ"]]]},
+{ id:"math2", name:"উচ্চতর গণিত ২য় পত্র", group:"2", icon:"📈", parts:[["অধ্যায়সমূহ",["বাস্তব সংখ্যা ও অসমতা","যোগাশ্রয়ী প্রোগ্রাম","জটিল সংখ্যা","বহুপদী ও বহুপদী সমীকরণ","দ্বিপদী বিস্তৃতি","কণিক","বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ","স্থিতিবিদ্যা","সমতলে বস্তুকণার গতি","বিস্তার পরিমাপ ও সম্ভাবনা"]]]}
+];
+const storeKey="edunova_hsc_2526_v1";
+let state={done:{},notes:"",custom:[]};
+try{const saved=JSON.parse(localStorage.getItem(storeKey)||"null");if(saved)state={...state,...saved}}catch(e){}
+const bn=n=>String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
+const allSubjects=()=>[...subjectsData.map(s=>({...s,custom:false})),...state.custom.map((s,i)=>({...s,custom:true,index:i}))];
+function save(){try{localStorage.setItem(storeKey,JSON.stringify(state));}catch(e){}}
+function topicsFor(s){return s.parts.flatMap((p,pi)=>p[1].map((t,ti)=>({key:s.id+"_"+pi+"_"+ti,title:t,part:p[0]}))).concat((s.extra||[]).map((t,i)=>({key:s.id+"_extra_"+i,title:t,part:"নিজের যোগ করা"})))}
+function render(){
+ const query=document.getElementById("search").value.trim().toLowerCase(), pf=document.getElementById("partFilter").value, sf=document.getElementById("statusFilter").value;
+ const all=allSubjects();let total=0,done=0;all.forEach(s=>topicsFor(s).forEach(t=>{total++;if(state.done[t.key])done++}));
+ document.getElementById("totalCount").textContent=bn(total);document.getElementById("doneCount").textContent=bn(done);document.getElementById("percent").textContent=bn(total?Math.round(done/total*100):0)+"%";
+ const filtered=all.map(s=>({...s,topics:topicsFor(s).filter(t=>(!query||(s.name+" "+t.title).toLowerCase().includes(query))&&(pf==="all"||s.group===pf)&&(sf==="all"||(sf==="done"?!!state.done[t.key]:!state.done[t.key])))})).filter(s=>s.topics.length);
+ const root=document.getElementById("subjects");
+ if(!filtered.length){root.innerHTML='<div class="empty">কিছু পাওয়া যায়নি। সার্চ বদলে দেখো।</div>';return}
+ root.innerHTML=filtered.map(s=>{
+ const ts=topicsFor(s),sd=ts.filter(t=>state.done[t.key]).length,p=Math.round(sd/(ts.length||1)*100);
+ const list=s.topics.map(t=>`<li><input type="checkbox" id="${esc(t.key)}" data-key="${esc(t.key)}" ${state.done[t.key]?"checked":""}><label for="${esc(t.key)}">${esc(t.title)}</label></li>`).join("");
+ return `<article class="subject"><div class="subject-head"><div class="emoji">${s.icon}</div><div><h3>${esc(s.name)}</h3><small>${bn(sd)} / ${bn(ts.length)} টপিক শেষ</small></div><span class="pill">${bn(p)}%</span></div><div class="progress"><div style="width:${p}%"></div></div><details ${query?"open":""}><summary>অধ্যায় ও টপিক দেখো</summary><ul class="topics">${list}</ul></details></article>`;
+ }).join("");
+ root.querySelectorAll('input[type="checkbox"]').forEach(c=>c.addEventListener("change",e=>{state.done[e.target.dataset.key]=e.target.checked;save();render()}));
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function setupCustomSelect(){document.getElementById("customSubject").innerHTML=allSubjects().map(s=>`<option value="${esc(s.id)}">${esc(s.name)}</option>`).join("")}
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("partFilter").addEventListener("change",render);
+document.getElementById("statusFilter").addEventListener("change",render);
+document.getElementById("notes").value=state.notes||"";
+document.getElementById("saveNotes").onclick=()=>{state.notes=document.getElementById("notes").value;save();document.getElementById("message").textContent="নোট সেভ হয়েছে ✓"};
+document.getElementById("addTopic").onclick=()=>{const id=document.getElementById("customSubject").value, name=document.getElementById("customTopic").value.trim();if(!name){document.getElementById("message").textContent="আগে টপিকের নাম লেখো।";return}let s=state.custom.find(x=>x.id===id);if(!s){const orig=subjectsData.find(x=>x.id===id);s=state.custom.find(x=>x.id==="custom_"+id);if(!s){s={id:"custom_"+id,name:orig.name+" · নিজের টপিক",group:orig.group,icon:"➕",parts:[],extra:[]};state.custom.push(s)}}s.extra=s.extra||[];s.extra.push(name);document.getElementById("customTopic").value="";save();setupCustomSelect();render();document.getElementById("message").textContent="টপিক যোগ হয়েছে ✓"};
+document.getElementById("reset").onclick=()=>{if(confirm("সব টিক/অগ্রগতি মুছে ফেলবে? নোট থাকবে।")){state.done={};save();render();document.getElementById("message").textContent="অগ্রগতি মুছে দেওয়া হয়েছে।"}};
+document.getElementById("downloadBackup").onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="edunova-backup.json";a.click();URL.revokeObjectURL(a.href);document.getElementById("message").textContent="ব্যাকআপ ফাইল তৈরি হয়েছে।"};
+setupCustomSelect();render();
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+</script>
+</body></html>
